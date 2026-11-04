@@ -6,6 +6,15 @@
 hs_err_pid*
 replay_pid*
 
+# Local configuration and secrets
+db.properties
+.env
+.env.*
+
+# Build output
+out/
+bin/
+
 # IDE and Editor files
 .idea/
 .vscode/

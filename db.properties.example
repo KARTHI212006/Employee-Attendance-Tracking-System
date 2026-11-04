@@ -1,0 +1,7 @@
+# Copy this file to "db.properties" in the project root and set your own values.
+# "db.properties" is ignored by Git. Never commit real passwords.
+# Environment variables with the same names (DB_URL, DB_USER, DB_PASSWORD) take priority over this file.
+
+DB_URL=jdbc:mysql://localhost:3306/employee_attendance_system
+DB_USER=root
+DB_PASSWORD=

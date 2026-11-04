@@ -40,10 +40,11 @@ It is a learning project focused on Java OOP structure, JDBC data access, and re
 .
 ├── lib/
 │   └── mysql-connector-j-9.4.0.jar
+├── db.properties.example      # Template for local database settings
 ├── src/
 │   ├── Main.java              # Entry point, login, admin/employee menus
 │   ├── Login.java             # Credential check against the users table
-│   ├── DBConnection.java      # JDBC connection settings
+│   ├── DBConnection.java      # JDBC connection (reads DB_URL, DB_USER, DB_PASSWORD)
 │   ├── TestConnection.java    # Quick database connectivity check
 │   ├── Emloyee.java           # Employee operations (file name spelled as in the source)
 │   ├── EmployeeManagement.java
@@ -74,9 +75,12 @@ Exact column definitions should be taken from the `INSERT` and `SELECT` statemen
 
 1. Create the database: `CREATE DATABASE employee_attendance_system;`
 2. Create the tables above and add at least one `ADMIN` user.
-3. Open `src/DBConnection.java` and set the MySQL username and password for **your own** local server.
+3. Provide your own MySQL settings. `DBConnection.java` reads `DB_URL`, `DB_USER` and `DB_PASSWORD` in this order:
+   1. Environment variables, for example (Linux / macOS): `export DB_PASSWORD='your-password'`; (Windows PowerShell): `$env:DB_PASSWORD = 'your-password'`
+   2. A local `db.properties` file in the project root. Copy `db.properties.example` to `db.properties` and edit it. This is convenient when you run from an IDE.
+   3. Local-development defaults: `jdbc:mysql://localhost:3306/employee_attendance_system`, user `root`, and an empty password.
 
-> **Security note:** Database credentials are currently set directly in `DBConnection.java`. Use your own local credentials and avoid committing real passwords. A planned improvement is to read them from environment variables.
+> **Security note:** No password is stored in the source code, and `db.properties` is ignored by Git. Never commit real credentials. If your local MySQL `root` account has a password, you must set `DB_PASSWORD`.
 
 ## Build and Run
 
@@ -105,7 +109,6 @@ Working console application for the flows listed above. No automated tests, sche
 ## Future Improvements
 
 - Add a `schema.sql` with table definitions and sample data.
-- Move database credentials to environment variables or a config file.
 - Hash stored passwords.
 - Add input validation and unit tests.
 
